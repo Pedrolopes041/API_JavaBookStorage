@@ -1,13 +1,16 @@
 package com.bookstorage.jpa.modals;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Author")
-public class authorModal implements Serializable {
+public class AuthorModal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -16,6 +19,10 @@ public class authorModal implements Serializable {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    private Set<Bookmodal> books = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -31,5 +38,13 @@ public class authorModal implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Bookmodal> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Bookmodal> books) {
+        this.books = books;
     }
 }
