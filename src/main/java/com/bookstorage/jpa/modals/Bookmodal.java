@@ -20,11 +20,12 @@ public class Bookmodal implements Serializable {
     @Column(nullable = false, unique = true)
     private String title;
 
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "publisher_id")//add uma nova coluna que será a chave estrangeira
     private PublisherModal publisherModal;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany
     @JoinTable(
             name = "TB_BOOK_AUTHOR",
