@@ -20,7 +20,7 @@ public class AuthorModal implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
     private Set<Bookmodal> books = new HashSet<>();
 
